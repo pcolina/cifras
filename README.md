@@ -66,7 +66,7 @@ State lives in services as **private writable signals** and is exposed as **read
 
 ## Getting started
 
-Requires **Node.js 20+**.
+Requires **Node.js 20.19+ or 22.12+** (Angular 21 minimum).
 
 ```bash
 git clone https://github.com/pcolina/cifras.git
