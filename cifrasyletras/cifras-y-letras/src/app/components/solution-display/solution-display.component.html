@@ -1,0 +1,76 @@
+<div class="solution-display">
+  <!-- Target Reminder -->
+  <div class="target-reminder">
+    <span class="label">Número objetivo:</span>
+    <span class="value">{{ gameState().targetNumber }}</span>
+  </div>
+
+  <!-- Result Message -->
+  <div class="result-message" [class.winner]="playerWon()">
+    {{ getResultMessage() }}
+  </div>
+
+  <!-- Points -->
+  <div class="points-section">
+    <span class="points-label">Puntos:</span>
+    <span class="points-value">{{ getPoints() }}</span>
+  </div>
+
+  <!-- Player's Solution -->
+  @if (gameState().playerSolution) {
+    <div class="solution-section player-solution">
+      <h3 class="solution-title">Tu resultado</h3>
+
+      <div class="result-box" [class.exact]="gameState().playerSolution!.isExact">
+        <span class="result-value">{{ gameState().playerSolution!.result }}</span>
+        @if (!gameState().playerSolution!.isExact) {
+          <span class="difference">(diferencia: {{ gameState().playerSolution!.difference }})</span>
+        }
+      </div>
+
+      @if (gameState().playerSolution!.operations.length > 0) {
+        <div class="operations-list">
+          @for (op of gameState().playerSolution!.operations; track $index) {
+            <div class="operation-item">
+              {{ op.num1 }} {{ operatorLabels[op.operator] }} {{ op.num2 }} = {{ op.result }}
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Best Solution -->
+  @if (showBestSolution() && gameState().bestSolution) {
+    <div class="solution-section best-solution">
+      <h3 class="solution-title">
+        @if (gameState().bestSolution!.isExact) {
+          Solución exacta
+        } @else {
+          Mejor solución posible
+        }
+      </h3>
+
+      <div class="result-box best" [class.exact]="gameState().bestSolution!.isExact">
+        <span class="result-value">{{ gameState().bestSolution!.result }}</span>
+        @if (!gameState().bestSolution!.isExact) {
+          <span class="difference">(diferencia: {{ gameState().bestSolution!.difference }})</span>
+        }
+      </div>
+
+      @if (gameState().bestSolution!.operations.length > 0) {
+        <div class="operations-list">
+          @for (op of gameState().bestSolution!.operations; track $index) {
+            <div class="operation-item">
+              {{ op.num1 }} {{ operatorLabels[op.operator] }} {{ op.num2 }} = {{ op.result }}
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="no-operations">
+          El número {{ gameState().bestSolution!.result }} ya estaba disponible
+        </div>
+      }
+    </div>
+  }
+</div>

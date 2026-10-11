@@ -1,0 +1,37 @@
+<div class="settings">
+  <div class="settings-header">
+    <h2>Configuración</h2>
+    <button class="close-btn" (click)="onClose()">✕</button>
+  </div>
+
+  <div class="settings-content">
+    <!-- Time Setting -->
+    <div class="setting-group">
+      <label class="setting-label">Tiempo de juego</label>
+      <div class="time-options">
+        @for (option of timeOptions; track option.value) {
+          <button
+            class="time-btn"
+            [class.selected]="settings().totalTime === option.value"
+            (click)="updateTime(option.value)"
+          >
+            {{ option.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="info-section">
+      <h3>Cómo jugar</h3>
+      <ul>
+        <li>Selecciona cuántos números grandes quieres (0-4)</li>
+        <li>Usa los 6 números para conseguir el número objetivo</li>
+        <li>Haz click en un número, luego en una operación, y luego en otro número</li>
+        <li>Cada número solo se puede usar una vez</li>
+        <li>Los resultados intermedios se pueden usar en nuevas operaciones</li>
+        <li>Solo se permiten resultados enteros positivos</li>
+      </ul>
+    </div>
+  </div>
+</div>

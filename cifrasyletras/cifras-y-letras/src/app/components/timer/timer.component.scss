@@ -1,0 +1,117 @@
+$accent-yellow: #ffd600;
+$success-green: #4caf50;
+$warning-orange: #ff9800;
+$error-red: #f44336;
+$text-light: #ffffff;
+$info-blue: #2196f3;
+
+.timer-container {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  &.low-time {
+    animation: pulse 1s infinite;
+    border: 2px solid $error-red;
+  }
+
+  &.no-limit {
+    border: 2px solid rgba($info-blue, 0.5);
+  }
+}
+
+.timer-display {
+  text-align: center;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.time-label {
+  font-size: 0.7rem;
+  color: rgba($text-light, 0.6);
+  text-transform: uppercase;
+}
+
+.time-value {
+  font-family: 'Courier New', monospace;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: $accent-yellow;
+  text-shadow: 0 0 10px rgba($accent-yellow, 0.5);
+  line-height: 1;
+
+  .low-time & {
+    color: $error-red;
+    text-shadow: 0 0 10px rgba($error-red, 0.5);
+  }
+
+  .no-limit & {
+    color: $info-blue;
+    text-shadow: 0 0 10px rgba($info-blue, 0.5);
+  }
+}
+
+.infinity-icon {
+  font-size: 1.1rem;
+  color: rgba($info-blue, 0.7);
+}
+
+.progress-bar {
+  height: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $success-green 0%, #66bb6a 100%);
+  border-radius: 0.4rem;
+  transition: width 1s linear, background 0.3s ease;
+
+  &.warning {
+    background: linear-gradient(90deg, $warning-orange 0%, #ffa726 100%);
+  }
+
+  &.danger {
+    background: linear-gradient(90deg, $error-red 0%, #ef5350 100%);
+  }
+}
+
+.no-limit-bar {
+  height: 0.35rem;
+  background: rgba($info-blue, 0.2);
+  border-radius: 0.3rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.no-limit-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, transparent 0%, $info-blue 50%, transparent 100%);
+  border-radius: 0.3rem;
+  animation: slide 2s ease-in-out infinite;
+}
+
+@keyframes slide {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba($error-red, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba($error-red, 0);
+  }
+}

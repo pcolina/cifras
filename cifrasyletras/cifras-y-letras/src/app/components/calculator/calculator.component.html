@@ -1,0 +1,83 @@
+<div class="calculator">
+  <!-- Available Numbers -->
+  <div class="numbers-section">
+    <div class="section-label">Números disponibles</div>
+    <div class="numbers-grid">
+      @for (num of gameState().availableNumbers; track num.id) {
+        <button
+          class="number-btn"
+          [class.used]="num.used"
+          [class.selected]="isNumberSelected(num)"
+          [class.is-result]="num.isResult"
+          [disabled]="num.used"
+          (click)="selectNumber(num)"
+        >
+          {{ num.value }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Current Expression -->
+  @if (currentExpression()) {
+    <div class="expression-section">
+      <div class="current-expression">
+        {{ currentExpression() }} <span class="cursor">_</span>
+      </div>
+    </div>
+  }
+
+  <!-- Operators -->
+  <div class="operators-section">
+    <div class="operators-grid">
+      @for (op of operators; track op) {
+        <button
+          class="operator-btn"
+          [class.selected]="isOperatorSelected(op)"
+          (click)="selectOperator(op)"
+        >
+          {{ operatorLabels[op] }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions-section">
+    <button class="action-btn clear" (click)="clearSelection()">
+      LIMPIAR
+    </button>
+    <button
+      class="action-btn undo"
+      [disabled]="!canUndo()"
+      (click)="undoLastOperation()"
+    >
+      DESHACER
+    </button>
+  </div>
+
+  <!-- Error Message -->
+  @if (errorMessage()) {
+    <div class="error-message">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <!-- Operations History -->
+  @if (gameState().operations.length > 0) {
+    <div class="history-section">
+      <div class="section-label">Operaciones realizadas</div>
+      <div class="operations-list">
+        @for (op of gameState().operations; track $index) {
+          <div class="operation-item">
+            <span class="op-num">{{ op.num1 }}</span>
+            <span class="op-symbol">{{ operatorLabels[op.operator] }}</span>
+            <span class="op-num">{{ op.num2 }}</span>
+            <span class="op-equals">=</span>
+            <span class="op-result">{{ op.result }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

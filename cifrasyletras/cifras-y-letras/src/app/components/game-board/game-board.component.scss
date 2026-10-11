@@ -1,0 +1,508 @@
+$primary-blue: #1a237e;
+$secondary-blue: #283593;
+$accent-yellow: #ffd600;
+$accent-gold: #ffab00;
+$text-light: #ffffff;
+$success-green: #4caf50;
+$error-red: #f44336;
+
+.game-container {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, $primary-blue 0%, $secondary-blue 50%, #0d1542 100%);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.25rem;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.game-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: $accent-yellow;
+  text-shadow: 2px 2px 0 #b39700,
+               -1px -1px 0 rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.2rem;
+  margin: 0;
+}
+
+// Score display
+.score-display {
+  display: flex;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba($accent-yellow, 0.3);
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-label {
+  font-size: 0.6rem;
+  color: rgba($text-light, 0.6);
+  text-transform: uppercase;
+}
+
+.score-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $accent-yellow;
+}
+
+.settings-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid $accent-yellow;
+  color: $accent-yellow;
+  font-size: 1.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background: $accent-yellow;
+    color: $primary-blue;
+    transform: rotate(90deg);
+  }
+}
+
+// Setup Screen
+.setup-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.setup-content {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba($accent-yellow, 0.3);
+  max-width: 450px;
+  width: 100%;
+
+  h2 {
+    color: $text-light;
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+// Time selector
+.time-selector {
+  margin: 0.75rem 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba($text-light, 0.1);
+}
+
+.selector-title {
+  color: $text-light;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+.time-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.time-btn {
+  padding: 0.4rem 0.7rem;
+  border-radius: 1.5rem;
+  border: 2px solid rgba($accent-yellow, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  color: $text-light;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: $accent-yellow;
+    background: rgba($accent-yellow, 0.1);
+  }
+
+  &.selected {
+    border-color: $accent-yellow;
+    background: linear-gradient(180deg, rgba($accent-yellow, 0.3) 0%, rgba($accent-gold, 0.2) 100%);
+    color: $accent-yellow;
+    font-weight: 500;
+  }
+}
+
+.start-btn {
+  background: linear-gradient(180deg, $accent-yellow 0%, $accent-gold 100%);
+  border: none;
+  color: $primary-blue;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.7rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba($accent-yellow, 0.4);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba($accent-yellow, 0.6);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Playing Screen
+.playing-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.target-section {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+  border: 3px solid $accent-yellow;
+  flex-shrink: 0;
+}
+
+.target-label {
+  color: rgba($text-light, 0.8);
+  font-size: 0.75rem;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+}
+
+.target-number {
+  font-family: 'Courier New', monospace;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: $accent-yellow;
+  text-shadow: 0 0 20px rgba($accent-yellow, 0.5);
+  line-height: 1;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  font-size: 0.85rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  &.reset {
+    background: rgba($accent-gold, 0.2);
+    border: 2px solid $accent-gold;
+    color: $accent-gold;
+
+    &:hover {
+      background: $accent-gold;
+      color: $primary-blue;
+    }
+  }
+
+  &.give-up {
+    background: rgba($error-red, 0.2);
+    border: 2px solid $error-red;
+    color: $error-red;
+
+    &:hover {
+      background: $error-red;
+      color: $text-light;
+    }
+  }
+}
+
+// Won Screen - Celebration!
+.won-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  animation: fadeIn 0.5s ease;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.win-celebration {
+  text-align: center;
+  animation: celebrate 0.6s ease;
+}
+
+@keyframes celebrate {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.win-icon {
+  font-size: 2.5rem;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.win-title {
+  font-size: 2rem;
+  color: $success-green;
+  margin: 0.25rem 0;
+  text-shadow: 0 0 30px rgba($success-green, 0.5);
+}
+
+.win-target {
+  font-family: 'Courier New', monospace;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: $accent-yellow;
+  text-shadow: 0 0 20px rgba($accent-yellow, 0.5);
+  line-height: 1;
+}
+
+.win-points {
+  font-size: 1.1rem;
+  color: $success-green;
+  margin-top: 0.25rem;
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.win-stats {
+  display: flex;
+  gap: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba($success-green, 0.3);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: rgba($text-light, 0.6);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: $text-light;
+
+  &.highlight {
+    color: $accent-yellow;
+  }
+}
+
+.win-operations {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  max-height: 30vh;
+  overflow-y: auto;
+
+  h4 {
+    color: rgba($text-light, 0.7);
+    margin-bottom: 0.25rem;
+    font-weight: normal;
+    font-size: 0.85rem;
+  }
+}
+
+.operation-line {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: $text-light;
+  padding: 0.15rem 0;
+}
+
+// Finished Screen
+.finished-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.play-again-btn {
+  background: linear-gradient(180deg, $accent-yellow 0%, $accent-gold 100%);
+  border: none;
+  color: $primary-blue;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba($accent-yellow, 0.4);
+  flex-shrink: 0;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba($accent-yellow, 0.6);
+  }
+}
+
+// Modal
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, $primary-blue 0%, $secondary-blue 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  border: 2px solid $accent-yellow;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .game-container {
+    padding: 0.25rem;
+  }
+
+  .game-header {
+    padding: 0.25rem;
+  }
+
+  .game-title {
+    font-size: 1.4rem;
+  }
+
+  .score-display {
+    padding: 0.2rem 0.5rem;
+    gap: 0.75rem;
+  }
+
+  .score-label {
+    font-size: 0.55rem;
+  }
+
+  .score-value {
+    font-size: 0.9rem;
+  }
+
+  .settings-btn {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 1rem;
+  }
+
+  .target-number {
+    font-size: 2rem;
+  }
+
+  .setup-content {
+    padding: 0.75rem;
+    margin: 0 0.25rem;
+  }
+
+  .start-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .time-btn {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .win-title {
+    font-size: 1.5rem;
+  }
+
+  .win-target {
+    font-size: 2rem;
+  }
+
+  .win-icon {
+    font-size: 2rem;
+  }
+
+  .win-stats {
+    gap: 1rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .action-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+  }
+}

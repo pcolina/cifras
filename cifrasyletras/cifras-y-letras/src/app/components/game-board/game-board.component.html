@@ -1,0 +1,140 @@
+<div class="game-container">
+  <header class="game-header">
+    <h1 class="game-title">CIFRAS</h1>
+
+    <!-- Score display -->
+    <div class="score-display">
+      <div class="score-item">
+        <span class="score-label">Puntos</span>
+        <span class="score-value">{{ gameState().totalScore }}</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">Ganadas</span>
+        <span class="score-value">{{ gameState().gamesWon }}/{{ gameState().gamesPlayed }}</span>
+      </div>
+    </div>
+
+    <button class="settings-btn" (click)="openSettings()" title="Configuración">
+      ⚙
+    </button>
+  </header>
+
+  <!-- Setup Screen -->
+  @if (gameState().status === 'setup') {
+    <div class="setup-screen">
+      <div class="setup-content">
+        <h2>Nueva Partida</h2>
+
+        <app-number-selector />
+
+        <!-- Time selector -->
+        <div class="time-selector">
+          <h3 class="selector-title">Tiempo de juego</h3>
+          <div class="time-options">
+            @for (option of timeOptions; track option.value) {
+              <button
+                class="time-btn"
+                [class.selected]="isTimeSelected(option)"
+                (click)="onTimeSelect(option.value, option.noLimit)"
+              >
+                {{ option.label }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <button class="start-btn" (click)="onStartGame()">
+          ¡EMPEZAR!
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Playing Screen -->
+  @if (gameState().status === 'playing') {
+    <div class="playing-screen">
+      <div class="target-section">
+        <div class="target-label">NÚMERO A CONSEGUIR</div>
+        <div class="target-number">{{ gameState().targetNumber }}</div>
+      </div>
+
+      <app-timer />
+
+      <app-calculator />
+
+      <div class="actions">
+        <button class="action-btn reset" (click)="onResetGame()">
+          REINICIAR
+        </button>
+        <button class="action-btn give-up" (click)="onGiveUp()">
+          RENDIRSE
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Won Screen -->
+  @if (gameState().status === 'won') {
+    <div class="won-screen">
+      <div class="win-celebration">
+        <div class="win-icon">🎉</div>
+        <h2 class="win-title">¡EXACTO!</h2>
+        <div class="win-target">{{ gameState().targetNumber }}</div>
+        <div class="win-points">+10 puntos</div>
+      </div>
+
+      <div class="win-stats">
+        <div class="stat-item">
+          <span class="stat-label">Operaciones usadas</span>
+          <span class="stat-value">{{ gameState().operations.length }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Puntuación total</span>
+          <span class="stat-value highlight">{{ gameState().totalScore }}</span>
+        </div>
+      </div>
+
+      <!-- Operations used -->
+      @if (gameState().operations.length > 0) {
+        <div class="win-operations">
+          <h4>Tu solución:</h4>
+          @for (op of gameState().operations; track $index) {
+            <div class="operation-line">
+              {{ op.num1 }}
+              @switch (op.operator) {
+                @case ('+') { + }
+                @case ('-') { − }
+                @case ('*') { × }
+                @case ('/') { ÷ }
+              }
+              {{ op.num2 }} = {{ op.result }}
+            </div>
+          }
+        </div>
+      }
+
+      <button class="play-again-btn" (click)="onPlayAgain()">
+        JUGAR DE NUEVO
+      </button>
+    </div>
+  }
+
+  <!-- Finished Screen (didn't win) -->
+  @if (gameState().status === 'finished') {
+    <div class="finished-screen">
+      <app-solution-display />
+      <button class="play-again-btn" (click)="onPlayAgain()">
+        JUGAR DE NUEVO
+      </button>
+    </div>
+  }
+
+  <!-- Settings Modal -->
+  @if (showSettings) {
+    <div class="modal-overlay" (click)="closeSettings()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <app-settings (close)="closeSettings()" />
+      </div>
+    </div>
+  }
+</div>

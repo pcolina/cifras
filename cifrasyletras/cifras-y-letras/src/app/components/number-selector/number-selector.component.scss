@@ -1,0 +1,87 @@
+$accent-yellow: #ffd600;
+$accent-gold: #ffab00;
+$primary-blue: #1a237e;
+$text-light: #ffffff;
+
+.number-selector {
+  padding: 0.5rem;
+}
+
+.selector-title {
+  color: $text-light;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+
+.selector-subtitle {
+  color: rgba($text-light, 0.6);
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.option-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid rgba($accent-yellow, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  color: $text-light;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $accent-yellow;
+    background: rgba($accent-yellow, 0.1);
+    transform: scale(1.1);
+  }
+
+  &.selected {
+    background: linear-gradient(180deg, $accent-yellow 0%, $accent-gold 100%);
+    color: $primary-blue;
+    border-color: $accent-yellow;
+    box-shadow: 0 0 15px rgba($accent-yellow, 0.5);
+  }
+}
+
+.selection-preview {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.preview-label {
+  color: rgba($text-light, 0.7);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.preview-value {
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  &.big {
+    color: $accent-yellow;
+  }
+
+  &.small {
+    color: #7986cb;
+  }
+}

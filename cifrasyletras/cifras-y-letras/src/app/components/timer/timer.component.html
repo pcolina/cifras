@@ -1,0 +1,26 @@
+<div class="timer-container" [class.low-time]="isLowTime()" [class.no-limit]="noTimeLimit()">
+  <div class="timer-display">
+    @if (noTimeLimit()) {
+      <span class="time-label">Tiempo</span>
+    }
+    <span class="time-value">{{ formatTime(displayTime()) }}</span>
+    @if (noTimeLimit()) {
+      <span class="infinity-icon">∞</span>
+    }
+  </div>
+
+  @if (!noTimeLimit()) {
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        [style.width.%]="progress()"
+        [class.warning]="progress() <= 30"
+        [class.danger]="progress() <= 15"
+      ></div>
+    </div>
+  } @else {
+    <div class="no-limit-bar">
+      <div class="no-limit-indicator"></div>
+    </div>
+  }
+</div>

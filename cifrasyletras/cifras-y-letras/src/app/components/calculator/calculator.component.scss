@@ -1,0 +1,273 @@
+$primary-blue: #1a237e;
+$secondary-blue: #283593;
+$accent-yellow: #ffd600;
+$accent-gold: #ffab00;
+$text-light: #ffffff;
+$success-green: #4caf50;
+$error-red: #f44336;
+
+.calculator {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.75rem;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.section-label {
+  color: rgba($text-light, 0.6);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.25rem;
+}
+
+// Numbers Section
+.numbers-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.numbers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+}
+
+.number-btn {
+  min-width: 3rem;
+  height: 2.5rem;
+  border-radius: 0.4rem;
+  border: 2px solid $accent-yellow;
+  background: linear-gradient(180deg, rgba($accent-yellow, 0.1) 0%, rgba($accent-gold, 0.05) 100%);
+  color: $text-light;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    background: linear-gradient(180deg, rgba($accent-yellow, 0.2) 0%, rgba($accent-gold, 0.1) 100%);
+  }
+
+  &.selected {
+    background: linear-gradient(180deg, $accent-yellow 0%, $accent-gold 100%);
+    color: $primary-blue;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba($accent-yellow, 0.6);
+  }
+
+  &.used {
+    opacity: 0.3;
+    border-color: rgba($text-light, 0.2);
+    cursor: not-allowed;
+    transform: scale(0.9);
+  }
+
+  &.is-result {
+    border-color: $success-green;
+    background: linear-gradient(180deg, rgba($success-green, 0.2) 0%, rgba($success-green, 0.1) 100%);
+
+    &.selected {
+      background: linear-gradient(180deg, $success-green 0%, #388e3c 100%);
+      color: $text-light;
+    }
+  }
+}
+
+// Expression Section
+.expression-section {
+  text-align: center;
+  padding: 0.4rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.4rem;
+}
+
+.current-expression {
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+  color: $accent-yellow;
+
+  .cursor {
+    animation: blink 1s infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// Operators Section
+.operators-section {
+  display: flex;
+  justify-content: center;
+}
+
+.operators-grid {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.operator-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid rgba($text-light, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: $text-light;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $accent-yellow;
+    background: rgba($accent-yellow, 0.2);
+    transform: scale(1.1);
+  }
+
+  &.selected {
+    background: $accent-yellow;
+    color: $primary-blue;
+    border-color: $accent-yellow;
+    box-shadow: 0 0 10px rgba($accent-yellow, 0.5);
+  }
+}
+
+// Actions Section
+.actions-section {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.35rem 0.8rem;
+  border-radius: 0.4rem;
+  border: 2px solid;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.clear {
+    border-color: rgba($text-light, 0.3);
+    background: transparent;
+    color: $text-light;
+
+    &:hover {
+      border-color: $text-light;
+      background: rgba($text-light, 0.1);
+    }
+  }
+
+  &.undo {
+    border-color: $accent-gold;
+    background: rgba($accent-gold, 0.1);
+    color: $accent-gold;
+
+    &:hover:not(:disabled) {
+      background: $accent-gold;
+      color: $primary-blue;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Error Message
+.error-message {
+  text-align: center;
+  color: $error-red;
+  font-size: 0.75rem;
+  padding: 0.3rem;
+  background: rgba($error-red, 0.1);
+  border-radius: 0.4rem;
+  border: 1px solid rgba($error-red, 0.3);
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+// History Section
+.history-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.operations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.operation-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  padding: 0.3rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+}
+
+.op-num {
+  color: $text-light;
+  font-weight: bold;
+}
+
+.op-symbol {
+  color: $accent-yellow;
+  font-weight: bold;
+}
+
+.op-equals {
+  color: rgba($text-light, 0.5);
+}
+
+.op-result {
+  color: $success-green;
+  font-weight: bold;
+}
+
+// Responsive
+@media (max-width: 500px) {
+  .number-btn {
+    min-width: 2.5rem;
+    height: 2.2rem;
+    font-size: 1rem;
+  }
+
+  .operator-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.2rem;
+  }
+
+  .current-expression {
+    font-size: 1.2rem;
+  }
+}
